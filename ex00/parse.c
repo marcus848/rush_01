@@ -1,36 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marcudos <marcudos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 12:14:02 by marcudos          #+#    #+#             */
-/*   Updated: 2025/03/11 13:33:06 by marcudos         ###   ########.fr       */
+/*   Created: 2025/03/11 12:16:10 by marcudos          #+#    #+#             */
+/*   Updated: 2025/03/11 14:09:52 by marcudos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rush01.h"
-#include <unistd.h>
 
-int	main(int argc, char **argv)
+void	reset_grid(int grid[4][4])
 {
-	int	grid[4][4];
-	int	clues[16];
-	int	i = 0;
+	int	i;
+	int	j;
 
-	if (argc != 2)
-		return (1);
-	if (!parse_args(argv[1]))
-		return (1);
-	get_clues(clues, argv[1]);
-	reset_grid(grid);
-	if (solve_skyscrapers(grid, clues, 0, 0))
-		print_grid(grid);
-	else
+	i = -1;
+	while (++i < 4)
 	{
-		print_grid(grid);
-		write(1, "Error\n", 6);
+		j = -1;
+		while (++j < 4)
+			grid[i][j] = 0;
 	}
-	return (0);
+}
+
+int	parse_args(char *argv)
+{
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (argv[i])
+	{
+		while (argv[i] == ' ')
+			i++;
+		if (!(argv[i] >= '1' && argv[i] <= '4'))
+			return (0);
+		else
+			count++;
+		i++;
+		if (argv[i] != ' ' && argv[i])
+			return (0);
+	}
+	if (count != 16)
+		return (0);
+	return (1);
 }
