@@ -27,7 +27,7 @@ int	check_right_clue(int row[4], int clue);
 int	check_top_clue(int grid[4][4], int col, int clue);
 int	check_bottom_clue(int grid[4][4], int col, int clue);
 int	check_row_clues(int row[4], int left_clue, int right_clue);
-int	check_col_clues(int grid[4][4], int col, int top_clue, int bottom_clue);
+int	check_cols_clues(int grid[4][4], int col, int top_clue, int bottom_clue);
 int	check_clues(int grid[4][4], int clues[16]);
 void	ft_putchar(char c);
 void	print_grid(int	grid[4][4]);

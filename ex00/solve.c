@@ -42,15 +42,28 @@ int	solve_skyscrapers(int grid[4][4], int clues[16], int row, int col)
 	if (row == 4)
 		return (check_clues(grid, clues));
 	if (col == 4)
-		return (solve_skyscrapers(grid, clues, row + 1, col));
-	if (grid[row][col] != 0)
-		return (solve_skyscrapers(grid, clues, row, col + 1));
+		return (solve_skyscrapers(grid, clues, row + 1, 0));
+	// if (grid[row][col] != 0)
+	// 	return (solve_skyscrapers(grid, clues, row, col + 1));
 	num = 0;
 	while (++num <= 4)
 	{
 		grid[row][col] = num;
-		if (solve_skyscrapers(grid, clues, row, col + 1))
-			return (1);
+		if (check_repeat_numbers(grid))
+		{
+			if (col == 3 && !check_row_clues(grid[row], clues[8 + row], clues[12 + row]))
+			{
+				grid[row][col] = 0;
+				continue ;
+			}
+			if (row == 3 && !check_cols_clues(grid, col, clues[col], clues[4 + col]))
+			{
+				grid[row][col] = 0;
+				continue;
+			}
+			if (solve_skyscrapers(grid, clues, row, col + 1))
+				return (1);
+		}
 		grid[row][col] = 0;
 	}
 	return (0);

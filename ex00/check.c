@@ -21,7 +21,7 @@ int	check_row_clues(int row[4], int left_clue, int right_clue)
 	return (1);
 }
 
-int	check_col_clues(int grid[4][4], int col, int top_clue, int bottom_clue)
+int	check_cols_clues(int grid[4][4], int col, int top_clue, int bottom_clue)
 {
 	if (!check_top_clue(grid, col, top_clue))
 		return (0);

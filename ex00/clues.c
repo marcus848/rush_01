@@ -44,7 +44,7 @@ int	check_clues(int grid[4][4], int clues[16])
 	i = -1;
 	while (++i < 4)
 	{
-		if (!check_col_clues(grid, i, clues[i], clues[4 + i]))
+		if (!check_cols_clues(grid, i, clues[i], clues[4 + i]))
 			return (0);
 	}
 	return (1);
